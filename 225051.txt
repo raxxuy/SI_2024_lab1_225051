@@ -1,0 +1,208 @@
+4.
+git init # Иницијализира git
+Initialized empty Git repository in C:/Users/Micho/Desktop/SI_2024_lab1_225051/.git/
+
+5.
+git remote add origin https://github.com/raxxuy/SI_2024_lab1_225051 # Поврзува со remote repository
+
+6.
+git add README.md # Додава README.md во staged за commit
+
+git commit -m "Initial commit" # Прави commit
+[master (root-commit) 8885afb] Initial commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+
+7.
+git add *.java # Ги додава сите .java фајлови во моменталиот директориум во staged за commit
+
+git commit -m "Add starter code" # Прави commit
+[master 87faf9a] Add starter code
+ 3 files changed, 47 insertions(+)
+ create mode 100644 SILab1Main.java
+ create mode 100644 SILab1_1.java
+ create mode 100644 SILab1_2.java
+
+8.
+git push --all origin # Ги синхронизира сите гранки со remote
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (8/8), 1.11 KiB | 284.00 KiB/s, done.
+Total 8 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/raxxuy/SI_2024_lab1_225051
+ * [new branch]      master -> master
+
+9.
+git branch bug1 # Креира гранка bug1
+
+git branch bug2 # Креира гранка bug2
+
+10.
+git checkout bug1 # Префрлува во гранка bug1
+
+11.
+git add SILab1_1.java # Додава SILab1_1.java во staged за commit
+
+git commit -m "Fix wrong condition in filterOddLengthStrings" # Прави commit
+[bug1 b55940c] Fix wrong condition in filterOddLengthStrings
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+12.
+git checkout bug2 # Префрлува во гранка bug2
+
+13.
+git add SILab1_2.java # Додава SILab1_2.java во staged за commit
+
+git commit -m "Fix wrong condition in makeBigStringFrom" # Прави commit
+[bug2 b47ad0f] Fix wrong condition in makeBigStringFrom
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+14.
+git checkout bug1 # Префрлува во гранка bug1
+
+15.
+git add SILab1Main.java # Додава SILab1Main.java во staged за commit
+
+git commit -m "Call method filterOddLengthStrings in main class" # Прави commit
+[bug1 6a04e6c] Call method filterOddLengthStrings in main class
+ 1 file changed, 1 insertion(+)
+
+16.
+git checkout bug2 # Префрлува во гранка bug2
+
+17.
+git add SILab1Main.java # Додава SILab1Main.java во staged за commit
+
+git commit -m "Call method makeBigStringFrom in main class" # Прави commit
+[bug2 0c17087] Call method makeBigStringFrom in main class
+ 1 file changed, 1 insertion(+)
+
+18.
+git push --all origin # Ги синхронизира сите гранки со remote
+Enumerating objects: 16, done.
+Counting objects: 100% (16/16), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (12/12), done.
+Writing objects: 100% (12/12), 1.23 KiB | 179.00 KiB/s, done.
+Total 12 (delta 8), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (8/8), completed with 4 local objects.
+To https://github.com/raxxuy/SI_2024_lab1_225051
+ * [new branch]      bug1 -> bug1
+ * [new branch]      bug2 -> bug2
+
+19.
+git checkout master # Префрлува во гранка master
+
+20.
+git merge bug1 # Спојува bug1 кон гранката master (нема конфликти, стратегија Fast-forward)
+Updating 87faf9a..6a04e6c
+Fast-forward
+ SILab1Main.java | 1 +
+ SILab1_1.java   | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+21.
+git push --all origin # Ги синхронизира сите гранки со remote
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/raxxuy/SI_2024_lab1_225051
+   87faf9a..6a04e6c  master -> master
+
+22.
+git checkout bug2 # Префрлува во гранка bug2
+
+23.
+git rebase master # Rebase на bug1 спрема гранка master (има конфликт, решено рачно, стратегија recursive)
+Auto-merging SILab1Main.java
+CONFLICT (content): Merge conflict in SILab1Main.java
+error: could not apply 0c17087... Call method makeBigStringFrom in main class
+hint: Resolve all conflicts manually, mark them as resolved with
+hint: "git add/rm <conflicted_files>", then run "git rebase --continue".
+hint: You can instead skip this commit: run "git rebase --skip".
+hint: To abort and get back to the state before "git rebase", run "git rebase --abort".
+Could not apply 0c17087... Call method makeBigStringFrom in main class
+
+git add SILab1Main.java # Додава SILab1Main.java во staged за commit
+
+git rebase --continue # Продолжува rebase после решавање на конфликти
+[detached HEAD cb28c18] Call method makeBigStringFrom in main class
+ 1 file changed, 1 insertion(+)
+Successfully rebased and updated refs/heads/bug2.
+
+24.
+git checkout master # Префрлува во гранка master
+
+25.
+git merge bug2 # Спојува bug2 кон гранката master (нема конфликти, стратегија Fast-forward)
+Updating 6a04e6c..cb28c18
+Fast-forward
+ SILab1Main.java | 1 +
+ SILab1_2.java   | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+26.
+git push --all origin # Ги синхронизира сите гранки со remote (јавува грешка за гранката bug2)
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 659 bytes | 659.00 KiB/s, done.
+Total 6 (delta 4), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (4/4), completed with 3 local objects.
+To https://github.com/raxxuy/SI_2024_lab1_225051
+   6a04e6c..cb28c18  master -> master
+ ! [rejected]        bug2 -> bug2 (non-fast-forward)
+error: failed to push some refs to 'https://github.com/raxxuy/SI_2024_lab1_225051'
+hint: Updates were rejected because a pushed branch tip is behind its remote
+hint: counterpart. If you want to integrate the remote changes, use 'git pull'
+hint: before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+27.
+git checkout bug2 # Префрлува во гранка bug2
+
+git push -f https://github.com/raxxuy/SI_2024_lab1_225051 # Синхронизира принудно
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/raxxuy/SI_2024_lab1_225051
+ + 0c17087...cb28c18 bug2 -> bug2 (forced update)
+
+28.
+git checkout master # Префрлува во гранката master
+
+git log # Принта досегашните git логови
+commit cb28c18958c8d0ec693198d6feff78258df137f3 (HEAD -> master, origin/master, bug2)
+Author: raxxuy <milanilkov@gmail.com>
+Date:   Mon Apr 1 21:58:59 2024 +0200
+
+    Call method makeBigStringFrom in main class
+
+commit 504d67c3f1bec70085cee90c1d5fb16f37ccec6f
+Author: raxxuy <milanilkov@gmail.com>
+Date:   Mon Apr 1 21:55:48 2024 +0200
+
+    Fix wrong condition in makeBigStringFrom
+
+commit 6a04e6c89681ef5dd21cb63d8b2e050e9eb74fcc (origin/bug1, bug1)
+Author: raxxuy <milanilkov@gmail.com>
+Date:   Mon Apr 1 21:57:38 2024 +0200
+
+    Call method filterOddLengthStrings in main class
+
+commit b55940c701d3fd2db4a6e179bf56fcf9b32f013a
+Author: raxxuy <milanilkov@gmail.com>
+Date:   Mon Apr 1 21:53:37 2024 +0200
+
+    Fix wrong condition in filterOddLengthStrings
+
+commit 87faf9aed5c4f38edf9329b7a5f8c57398e3b724
+Author: raxxuy <milanilkov@gmail.com>
+Date:   Mon Apr 1 21:50:42 2024 +0200
+
+    Add starter code
+
+commit 8885afb22f985267d91eaa386f1a711d884f81af
+Author: raxxuy <milanilkov@gmail.com>
+Date:   Mon Apr 1 21:49:24 2024 +0200
+
+    Initial commit
